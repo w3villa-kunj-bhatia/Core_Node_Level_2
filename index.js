@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(logger);
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to the User Management API" });
 });
 
