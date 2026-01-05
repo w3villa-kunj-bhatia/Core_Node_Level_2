@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
+const authRoutes = require("./routes/authRoutes");
 const logger = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler");
 
@@ -18,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/users", userRoutes);
+app.use("/auth", authRoutes);
 app.use(errorHandler);
 
 app.listen(process.env.PORT, () => {
