@@ -1,22 +1,25 @@
 const express = require("express");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
 const logger = require("./middleware/logger");
 const errorHandler = require("./middleware/errorHandler");
 
+dotenv.config();
+connectDB();
+
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(logger);
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "Welcome to the User Management API" });
+  res.json({ message: "User Management API with MongoDB" });
 });
 
 app.use("/users", userRoutes);
-
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
 });
